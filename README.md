@@ -14,3 +14,8 @@ Run the following command as root:
 
 ```bash
 wget -qO- [https://raw.githubusercontent.com/mathewskdaniel/EasyMTProto/main/mtproto-proxy-installer.sh](https://raw.githubusercontent.com/mathewskdaniel/EasyMTProto/main/mtproto-proxy-installer.sh) | bash
+```
+
+## Credits
+
+This script utilizes the excellent [mtg](https://github.com/9seconds/mtg) project by [9seconds](https://github.com/9seconds), an un-censorable MTProto proxy written in Go.
