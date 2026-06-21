@@ -66,7 +66,7 @@ SECRET=$("$BINARY_PATH" generate-secret google.com)
 echo "=== Creating configuration file ==="
 cat << EOF > "$CONFIG_FILE"
 secret = "$SECRET"
-bind-to = "0.0.0.0:$PORT"
+bind-to = "[::]:$PORT"
 EOF
 
 # 5. Create Background Service
@@ -124,13 +124,25 @@ elif [ "$OS" = "debian" ]; then
 fi
 
 if [ "$IS_RUNNING" = "true" ]; then
-    # Fetch IP safely with a timeout to prevent hanging
-    SERVER_IP=$(curl -s4 --max-time 3 ifconfig.me || echo "YOUR_SERVER_IP")
+    # Fetch IPs safely with a timeout to prevent hanging
+    IPV4=$(curl -s -4 --max-time 3 ifconfig.me || wget -qO- -4 icanhazip.com)
+    IPV6=$(curl -s -6 --max-time 3 ifconfig.me || wget -qO- -6 icanhazip.com)
+
+    [ -z "$IPV4" ] && IPV4="YOUR_SERVER_IPV4"
+
     echo "=================================================="
     echo " SUCCESS: MTProto Proxy Installed Successfully!"
     echo "=================================================="
-    echo "tg://proxy?server=$SERVER_IP&port=$PORT&secret=$SECRET"
-    echo "https://t.me/proxy?server=$SERVER_IP&port=$PORT&secret=$SECRET"
+    echo "IPv4 Links:"
+    echo "tg://proxy?server=$IPV4&port=$PORT&secret=$SECRET"
+    echo "https://t.me/proxy?server=$IPV4&port=$PORT&secret=$SECRET"
+
+    if [ -n "$IPV6" ]; then
+        echo "--------------------------------------------------"
+        echo "IPv6 Links (Recommended if supported):"
+        echo "tg://proxy?server=[$IPV6]&port=$PORT&secret=$SECRET"
+        echo "https://t.me/proxy?server=[$IPV6]&port=$PORT&secret=$SECRET"
+    fi
     echo "=================================================="
 else
     echo "=================================================="
