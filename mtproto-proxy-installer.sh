@@ -6,7 +6,7 @@ set -e
 # Prompt the user for the port number (POSIX compliant)
 echo "=================================================="
 printf "Enter the port number for the proxy [Default: 443]: "
-read PORT
+read PORT < /dev/tty
 PORT=${PORT:-443}
 echo "Proxy will be bound to port: $PORT"
 echo "=================================================="
