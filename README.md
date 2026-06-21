@@ -13,7 +13,7 @@ A lightweight shell script to automatically install and configure the `mtg` MTPr
 Run the following command as root:
 
 ```bash
-wget -qO- [https://raw.githubusercontent.com/mathewskdaniel/EasyMTProto/main/mtproto-proxy-installer.sh](https://raw.githubusercontent.com/mathewskdaniel/EasyMTProto/main/mtproto-proxy-installer.sh) | bash
+wget -qO- https://raw.githubusercontent.com/mathewskdaniel/EasyMTProto/main/mtproto-proxy-installer.sh | bash
 ```
 
 ## Credits
